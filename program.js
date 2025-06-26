@@ -8,10 +8,22 @@ function displayGrid() {
 
             const gridCell = document.createElement("div");
             gridCell.classList.add("gridcell");
+            gridCell.addEventListener("mouseover", handleHoverEvent);
+            gridCell.addEventListener("mouseleave", handleMouseLeave);
 
             gridContainer.appendChild(gridCell);
         }
     }
+}
+
+function handleHoverEvent(event) {
+
+    event.target.classList.add("overGrid");
+
+}
+
+function handleMouseLeave(event) {
+    event.target.classList.remove("overGrid");
 }
 
 displayGrid();
