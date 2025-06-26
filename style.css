@@ -1,0 +1,16 @@
+#grid-container {
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+
+.gridcell {
+    flex: auto;
+    width: 95px;
+    height: 100px;
+    border-style: solid;
+    border-color: black;
+    border-width: 10px;
+    /* box-sizing: content-box; */
+}
+
