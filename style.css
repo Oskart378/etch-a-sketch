@@ -6,11 +6,11 @@
 
 .gridcell {
     flex: auto;
-    width: 95px;
-    height: 100px;
+    width: 105px;
+    height: 105px;
     border-style: solid;
     border-color: black;
-    border-width: 10px;
+    border-width: 5px;
     /* box-sizing: content-box; */
 }
 
