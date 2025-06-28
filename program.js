@@ -48,7 +48,7 @@ function getRandomRgbColor(opacity) {
     const g = getRandomNumber(255);
     const b = getRandomNumber(255);
 
-    return `rgb(${r}, ${g}, ${b}, ${opacity})`;
+    return `rgba(${r}, ${g}, ${b}, ${opacity})`;
 }
 
 function getRandomNumber(number) {
