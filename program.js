@@ -16,6 +16,7 @@ function displayGrid(numberOfCells) {
 
         const gridCell = document.createElement("div");
         gridCell.classList.add("gridcell");
+        gridCell.dataset.darkness = 0; // ← sets initial darkness
         gridCell.addEventListener("mouseover", handleHoverEvent);
         gridCell.style.width = `calc(100% / ${numberOfCells})`;
         gridCell.style.height = `calc(100% / ${numberOfCells})`;
@@ -27,8 +28,31 @@ function displayGrid(numberOfCells) {
 
 function handleHoverEvent(event) {
 
-    event.target.classList.add("overGrid");
+    //event.target.classList.add("overGrid");
+    let cell = event.target;
+    let count = cell.dataset.darkness || 0;
+    
+    if (count < 10) {
+        count++;
+        cell.dataset.darkness = count;
+       
+    }
 
+    const randomRGB = getRandomRgbColor();
+    cell.style.backgroundColor = getRandomRgbColor(count/10);
+
+}
+
+function getRandomRgbColor(opacity) {
+    const r = getRandomNumber(255);
+    const g = getRandomNumber(255);
+    const b = getRandomNumber(255);
+
+    return `rgb(${r}, ${g}, ${b}, ${opacity})`;
+}
+
+function getRandomNumber(number) {
+    return Math.floor(Math.random() * (number + 1));
 }
 
 function handleChangeOfCells() {
