@@ -4,18 +4,33 @@ const INITIAL_GRID_SIZE = 16;
 
 function drawGridCells (numberOfCells) {
 
-     let actualCellNumber = numberOfCells ** 2;
+    clearGrid();
 
-     for (let i = 0; i < actualCellNumber; i++) {
+     let totalCells = numberOfCells ** 2;
 
-        let gridCell = document.createElement("div");
+     for (let i = 0; i < totalCells; i++) {
+
+        const gridCell = document.createElement("div");
         gridCell.classList.add("gridCell");
         gridCell.style.width = `calc(100% / ${numberOfCells})`;
         gridCell.style.height = `calc(100% / ${numberOfCells})`;
+        gridCell.addEventListener("mouseover", handleOverEvent);
 
         gridContainer.appendChild(gridCell);
 
      } 
+}
+
+function handleOverEvent(event) {
+    
+    const cell = event.target;
+
+    cell.style.backgroundColor = "gray";
+}
+
+
+function clearGrid () {
+    gridContainer.innerHTML = "";
 }
 
 
