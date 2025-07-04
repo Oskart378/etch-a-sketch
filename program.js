@@ -1,81 +1,93 @@
-const INITIAL_SIZE = 16;
+// ===== Constants =====
+const MODES = {
+    DEFAULT: "default",
+    RAINBOW: "rainbow",
+    ERASER: "eraser"
+};
 
+// ===== DOM Elements =====
 const gridContainer = document.querySelector("#grid-container");
-const changeCellsBtn = document.querySelector(".change-cells-btn");
+const gridSlider = document.querySelector("#grid-slider");
+const sliderDisplay = document.querySelector("#display");
 
+const normalModeBtn = document.querySelector("#normal-btn");
+const rainbowModeBtn = document.querySelector("#rainbow-btn");
+const eraserBtn = document.querySelector("#eraser-btn");
+const clearBtn = document.querySelector("#clear-btn");
 
-function displayGrid(numberOfCells) {
+// ===== State =====
+let currentMode = MODES.DEFAULT;
 
-    let totalCells = numberOfCells ** 2;
+// ===== Functions =====
+function drawGridCells(numberOfCells) {
+    clearGrid();
+    const totalCells = numberOfCells ** 2;
 
     for (let i = 0; i < totalCells; i++) {
-
-        //const gridSize = parseInt(getComputedStyle(gridContainer).width);
-
-        //const cellSize = Math.floor(gridSize / numberOfCells); // 960px / number of cells
-
         const gridCell = document.createElement("div");
-        gridCell.classList.add("gridcell");
-        gridCell.dataset.darkness = 0; // ← sets initial darkness
-        gridCell.addEventListener("mouseover", handleHoverEvent);
+        gridCell.classList.add("gridCell");
         gridCell.style.width = `calc(100% / ${numberOfCells})`;
         gridCell.style.height = `calc(100% / ${numberOfCells})`;
-
+        gridCell.addEventListener("mouseover", handleOverEvent);
         gridContainer.appendChild(gridCell);
-    
     }
 }
 
-function handleHoverEvent(event) {
+function handleOverEvent(event) {
+    const cell = event.target;
 
-    //event.target.classList.add("overGrid");
-    let cell = event.target;
-    let count = cell.dataset.darkness || 0;
-    
-    if (count < 10) {
-        count++;
-        cell.dataset.darkness = count;
-       
-    }
-
-    const randomRGB = getRandomRgbColor();
-    cell.style.backgroundColor = getRandomRgbColor(count/10);
-
-}
-
-function getRandomRgbColor(opacity) {
-    const r = getRandomNumber(255);
-    const g = getRandomNumber(255);
-    const b = getRandomNumber(255);
-
-    return `rgba(${r}, ${g}, ${b}, ${opacity})`;
-}
-
-function getRandomNumber(number) {
-    return Math.floor(Math.random() * (number + 1));
-}
-
-function handleChangeOfCells() {
-    let numberOfCells = prompt("Enter the desired number of cells (gotta be under 100)");
-
-    if (isNaN(numberOfCells) || numberOfCells < 1 || numberOfCells > 100) {
-        alert("Invalid input. Enter a number from 1 to 100.");
-        return;
-      }
-
-    deleteGrid();
-
-    displayGrid(numberOfCells);
-
-}
-
-function deleteGrid() {
-    
-    while(gridContainer.firstChild) {
-        gridContainer.removeChild(gridContainer.firstChild);
+    if (currentMode === MODES.DEFAULT) {
+        cell.style.backgroundColor = "#00ff90";
+    } else if (currentMode === MODES.RAINBOW) {
+        cell.style.backgroundColor = getRandomRGB();
+    } else if (currentMode === MODES.ERASER) {
+        cell.style.backgroundColor = "#1a1a1a";
     }
 }
 
-changeCellsBtn.addEventListener("click", handleChangeOfCells);
+function getRandomRGB() {
+    const r = Math.floor(Math.random() * 256);
+    const g = Math.floor(Math.random() * 256);
+    const b = Math.floor(Math.random() * 256);
+    return `rgb(${r}, ${g}, ${b})`;
+}
 
-displayGrid(INITIAL_SIZE);
+function clearGrid() {
+    gridContainer.innerHTML = "";
+}
+
+function setActiveButton(selectedButton) {
+    [normalModeBtn, rainbowModeBtn, eraserBtn].forEach(btn =>
+        btn.classList.remove("active")
+    );
+    selectedButton.classList.add("active");
+}
+
+// ===== Event Listeners =====
+gridSlider.addEventListener("input", () => {
+    sliderDisplay.textContent = `${gridSlider.value} X ${gridSlider.value}`;
+    drawGridCells(parseInt(gridSlider.value));
+});
+
+clearBtn.addEventListener("click", () =>
+    gridSlider.dispatchEvent(new Event("input"))
+);
+
+normalModeBtn.addEventListener("click", () => {
+    currentMode = MODES.DEFAULT;
+    setActiveButton(normalModeBtn);
+});
+
+rainbowModeBtn.addEventListener("click", () => {
+    currentMode = MODES.RAINBOW;
+    setActiveButton(rainbowModeBtn);
+});
+
+eraserBtn.addEventListener("click", () => {
+    currentMode = MODES.ERASER;
+    setActiveButton(eraserBtn);
+});
+
+// ===== Initial Setup =====
+setActiveButton(normalModeBtn);
+gridSlider.dispatchEvent(new Event("input"));

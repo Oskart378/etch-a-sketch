@@ -1,34 +1,190 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+html {
+     font-family: 'Press Start 2P', cursive;
+}
+
+
+h1 {
+    text-align: center;
+    color: #e74c3c;
+
+    text-shadow:
+      0 0 5px #ff0033,
+      0 0 10px #ff0033,
+      0 0 20px #ff0033,
+      0 0 40px #ff0066,
+      0 0 60px #ff3399;
+  
+    animation: flicker 2s infinite;
+}
+
+@keyframes flicker {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
+      opacity: 1;
+      text-shadow:
+        0 0 5px #ff0033,
+        0 0 10px #ff0033,
+        0 0 20px #ff0033,
+        0 0 40px #ff0066,
+        0 0 60px #ff3399;
+    }
+    20%, 24%, 55% {
+      opacity: 0.4;
+      text-shadow: none;
+    }
+  }
+
+body {
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+    font-family: 'Press Start 2P';
+  }
+
+#main-container {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+
 #grid-container {
+    
     display: flex;
     flex-wrap: wrap;
-    width: 960px;
-    height: 960px;
-    margin: 0 auto;
-    box-sizing: border-box
-}
-
-.gridcell {
-    /* flex: auto; */
-    /* width: 105px;
-    height: 105px; */
+    width: 600px;
+    height: 600px;
     border-style: solid;
-    border-color: black;
+    border-width: 5px;
+    border-color: #333;
+}
+
+/*#grid-controllers {
+    
+}*/
+
+#grid-controllers {
+    
+    /* width: auto;
+    height: 600px; */
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 30px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.gridCell {
+    width: 50px;
+    height: 50px;
+    border-color: #333;
     border-width: 1px;
-    /* box-sizing:content-box; */
-    box-sizing: border-box
+    border-style: solid;
+    box-sizing: border-box;
+}
+
+.mode-options {
+    display: flex;
+    gap: 50px;
+}
+
+button {
+    background-color: transparent;
+    color: #e74c3c;
+    border: 2px solid #e74c3c;
+    text-shadow: 0 0 2px #e74c3c;
+  }
+
+.slider-container {
+    display: flex;
+    /*flex-direction: column;*/
+    align-items: center;
+    gap: 15px;
 }
 
 
+  .gridCell:hover {
+    box-shadow: 0 0 10px rgba(255,255,255,0.4);
+  }
 
-.overGrid {
+  /* .gridCell {
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  } */
+
+  button:hover {
+    background-color: #e74c3c;
+    color: #1a1a1a;
+    cursor: pointer;
+  }
+
+  .gridCell {
+    border-radius: 4px;
+    border: 1px solid #444;
+    transition: background-color 0.3s, box-shadow 0.2s;
+  }
+
+  .gridCell:hover {
+    box-shadow: 0 0 5px #e74c3c;
+  }
+  
+
+  button.active {
     background-color: red;
-}
-
-
-.change-cells-btn {
-    margin: 50px auto;
-    display: block;
-    padding: 25px 50px;
-    border-radius: 15%;
+    color: black;
+    box-shadow: 0 0 5px red, 0 0 10px red;
+    border: 2px solid black;
     font-weight: bold;
+    transform: scale(1.05);
 }
+
+
+
+/* Styling for slide*/ 
+
+input[type=range] {
+    -webkit-appearance: none;
+    width: 200px;
+    height: 10px;
+    background: #1a1a1a; /* dark track base */
+    border-radius: 5px;
+    outline: none;
+  }
+  
+  /* Track */
+  input[type=range]::-webkit-slider-runnable-track {
+    background: #333;
+    height: 10px;
+    border-radius: 5px;
+  }
+  
+  /* Firefox progress fill */
+  input[type=range]::-moz-range-progress {
+    background-color: #ff0033; /* neon red */
+    height: 10px;
+  }
+  
+  /* Thumb (handle) */
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 20px;
+    width: 20px;
+    background: #ff0033; /* red thumb */
+    border: 2px solid #ff99aa; /* soft pink neon outline */
+    border-radius: 50%;
+    cursor: pointer;
+    margin-top: -5px; /* centers the thumb */
+    box-shadow: 0 0 8px #ff0033;
+  }
+  
+  /* Firefox thumb */
+  input[type=range]::-moz-range-thumb {
+    background: #ff0033;
+    border: 2px solid #ff99aa;
+    border-radius: 50%;
+    cursor: pointer;
+
+  }
+  
+
