@@ -61,6 +61,7 @@ function handleOverEvent(event) {
     
     else if (currentMode === MODES.ERASER) {
         cell.style.backgroundColor = "#1a1a1a";
+        cell.dataset.darkness = 0;
     }
 }
 
@@ -73,7 +74,16 @@ function getRandomRGB() {
 
 function clearGrid() {
     gridContainer.innerHTML = "";
+
+    resetDarkness();
 }
+
+function resetDarkness() {
+    const cells = gridContainer.querySelectorAll('.gridCell');
+    cells.forEach(cell => {
+      cell.dataset.darkness = 0;
+    });
+  }
 
 function setActiveButton(selectedButton) {
     [normalModeBtn, rainbowModeBtn, eraserBtn].forEach(btn =>
