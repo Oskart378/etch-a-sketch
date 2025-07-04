@@ -1,7 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+html {
+     font-family: 'Press Start 2P', cursive;
+}
+
+
 h1 {
     text-align: center;
-
+    color: #e74c3c;
 }
+
+body {
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+    font-family: 'Press Start 2P';
+  }
 
 #main-container {
     display: flex;
@@ -17,7 +30,9 @@ h1 {
     flex-wrap: wrap;
     width: 600px;
     height: 600px;
-    
+    border-style: solid;
+    border-width: 5px;
+    border-color: #333;
 }
 
 /*#grid-controllers {
@@ -39,7 +54,7 @@ h1 {
 .gridCell {
     width: 50px;
     height: 50px;
-    border-color: black;
+    border-color: #333;
     border-width: 1px;
     border-style: solid;
     box-sizing: border-box;
@@ -51,8 +66,41 @@ h1 {
 }
 
 button {
-    padding: 10px 20px;
-    border-radius: 10px;
+    background-color: transparent;
+    color: #e74c3c;
+    border: 2px solid #e74c3c;
+    text-shadow: 0 0 2px #e74c3c;
+  }
+
+.slider-container {
+    display: flex;
+    /*flex-direction: column;*/
+    align-items: center;
+    gap: 15px;
 }
 
 
+  .gridCell:hover {
+    box-shadow: 0 0 10px rgba(255,255,255,0.4);
+  }
+
+  /* .gridCell {
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  } */
+
+  button:hover {
+    background-color: #e74c3c;
+    color: #1a1a1a;
+    cursor: pointer;
+  }
+
+  .gridCell {
+    border-radius: 4px;
+    border: 1px solid #444;
+    transition: background-color 0.3s, box-shadow 0.2s;
+  }
+
+  .gridCell:hover {
+    box-shadow: 0 0 5px #e74c3c;
+  }
+  

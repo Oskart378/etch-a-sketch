@@ -13,11 +13,15 @@
 
             <div id="grid-controllers">
                 <div class="mode-options">
-                    <button>Normal Mode</button>
-                    <button>Rainbow Mode</button>
+                    <button id="normal-btn">Normal Mode</button>
+                    <button id="rainbow-btn">Rainbow Mode</button>
+                    <button id="eraser-btn">Eraser</button>
+                    <button id="clear-btn">Clear</button>
                 </div>
-                <div>
-                    <input type="range"  min="4" max="100" value="16">
+                <div class="slider-container">
+                    <label for="grid-slider">Gridcells: </label>
+                    <input id="grid-slider" type="range"  min="4" max="100" value="16">
+                    <span id="display"></span>
                 </div>
             </div>
 
