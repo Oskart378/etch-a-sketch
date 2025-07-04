@@ -29,6 +29,7 @@ function drawGridCells(numberOfCells) {
         gridCell.style.width = `calc(100% / ${numberOfCells})`;
         gridCell.style.height = `calc(100% / ${numberOfCells})`;
         gridCell.addEventListener("mouseover", handleOverEvent);
+        gridCell.dataset.darkness = 0;
         gridContainer.appendChild(gridCell);
     }
 }
@@ -38,9 +39,27 @@ function handleOverEvent(event) {
 
     if (currentMode === MODES.DEFAULT) {
         cell.style.backgroundColor = "#00ff90";
-    } else if (currentMode === MODES.RAINBOW) {
+
+        let darkness = Number(cell.dataset.darkness);
+        
+        if (darkness < 10) {
+            darkness++;
+            cell.dataset.darkness = darkness;
+    
+            // Calculate how dark the cell should be, from 0 to 1
+            let shade = darkness * 0.1;  // 10% increments
+            
+            // Set black color with opacity
+            cell.style.backgroundColor = `rgba(0, 255, 144, ${shade})`;
+        }
+
+    } 
+    
+    else if (currentMode === MODES.RAINBOW) {
         cell.style.backgroundColor = getRandomRGB();
-    } else if (currentMode === MODES.ERASER) {
+    } 
+    
+    else if (currentMode === MODES.ERASER) {
         cell.style.backgroundColor = "#1a1a1a";
     }
 }
